@@ -1,19 +1,25 @@
 const express = require('express');
-const router = express.Router();
 const Seller = require('../models/seller');
+const router = express.Router();
 
+router.route('/').get(async (req, res) => {
+    let seller;
+    try {
+        seller = await Seller.find({});
 
-
-router.route('/').get(async(req,res,next) => {
-
-    const seller = await Seller.find({});
+    } catch (e) {
+        console.log(e);
+    }
     res.json(seller);
 
-}).post(async(req,res,next)=>{
-    const newSeller = new Seller(req.body);
-    await newSeller.save();
-    res.json(newSeller);
+}).post(async (req, res) => {
+    let newSeller = new Seller(req.body);
+    try {
+        await newSeller.save();
+    } catch (err) {
+        console.log(err);
+    }
+    res.json(newSeller)
 });
-
 
 module.exports = router;

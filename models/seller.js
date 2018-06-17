@@ -1,21 +1,17 @@
-const mongoose = require('mongoose');
+const mongoose = require('Mongoose');
 
-const Schema = mongoose.Schema;
+const sellerSchema = ({
+   name : {
+       type : String
+   },
+   email : {
+       type : String
+   },
+   cars: [{
+       type : mongoose.Schema.Types.ObjectId,
+       ref : 'car'
+   }]
 
-const  sellerSchema = new Schema({
-    name : {
-        type: String
-    },
-    email : {
-        type: String
-    },
-    cars: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'car'
-        }
-
-    ]
 });
 
-module.exports = mongoose.model('seller',sellerSchema);
+module.exports = mongoose.model('Seller',sellerSchema,'carsellers');
